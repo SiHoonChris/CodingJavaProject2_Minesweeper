@@ -8,8 +8,6 @@ import java.awt.event.*;
 
 // *** 윈도우 추가 *** //
 // *** 버튼 부착 : Restart 또는 Retry & Close *** //
-// *** 커밋 안돼서 다시 커밋 *** //
-
 public class Minesweeper extends JFrame {
 	
 	// ----------------------- [ Main Method ] ---------------------- //
