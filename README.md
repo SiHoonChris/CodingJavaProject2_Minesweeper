@@ -3,7 +3,7 @@
 
 ![game_ing](https://user-images.githubusercontent.com/109140000/202083846-cf8db251-0276-4e57-805d-8201ad11841d.png)
 ![game_end](https://user-images.githubusercontent.com/109140000/202083862-d7209127-e937-416b-b2a8-2f9153744eb7.png)
-
+![game_fail](https://user-images.githubusercontent.com/109140000/202085840-65fa2270-fa6b-4cf5-ba91-ae1938e5ba6d.png)
 
 ### 목차
 개발 동기 - 설계 - 후기 - 개선 사항 - 참고
@@ -17,7 +17,7 @@
 - JFrame 
 ![MineSweeper_Structure](https://user-images.githubusercontent.com/109140000/202059040-12dd3a37-6f95-4962-8275-bc54b52125a9.png)
 - Class & Method   
- ![Minesweeper_methods](https://user-images.githubusercontent.com/109140000/202083254-1ab2fa38-0860-440d-b009-c8218141f329.png)
+![Minesweeper_methods_right](https://user-images.githubusercontent.com/109140000/202085895-02784591-6583-4017-b7b7-a64e25682fe3.png)
 
 
 ## 후기
