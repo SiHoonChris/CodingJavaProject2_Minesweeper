@@ -1,6 +1,8 @@
 # CodingJavaProject2 - Minesweeper (22.10.28 ~ 22.11.13)  
 <img src="https://img.shields.io/badge/java-007396?style=for-the-badge&logo=java&logoColor=white">  
 
+![game_ing](https://user-images.githubusercontent.com/109140000/202083846-cf8db251-0276-4e57-805d-8201ad11841d.png)
+![game_end](https://user-images.githubusercontent.com/109140000/202083862-d7209127-e937-416b-b2a8-2f9153744eb7.png)
 
 
 ### 목차
@@ -14,9 +16,10 @@
 ## 설계
 - JFrame 
 ![MineSweeper_Structure](https://user-images.githubusercontent.com/109140000/202059040-12dd3a37-6f95-4962-8275-bc54b52125a9.png)
+- Class & Method   
+ ![Minesweeper_methods](https://user-images.githubusercontent.com/109140000/202083254-1ab2fa38-0860-440d-b009-c8218141f329.png)
 
-- 메서드&클래스 설명
- 
+
 ## 후기
 맨날 Eclipse 콘솔창에다 글자만 찍다가, 스스로 움직이고 내 동작에 반응하는 프로그램을 만들어내니 재밌었다.
 코드가 점차 길어질수록 변수와 메서드가 다양해지고 많아졌는데, 마치 부품들을 조립하는 느낌이 들었다.
