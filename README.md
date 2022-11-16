@@ -1,5 +1,7 @@
-# CodingJavaProject2 - Minesweeper
-2022.10.28 ~ 2022.11.13
+# CodingJavaProject2 - Minesweeper (22.10.28 ~ 22.11.13)  
+<img src="https://img.shields.io/badge/java-007396?style=for-the-badge&logo=java&logoColor=white">  
+
+
 
 ### 목차
 개발 동기 - 설계 - 후기 - 개선 사항 - 참고
