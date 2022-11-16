@@ -10,7 +10,9 @@
 - 해볼 만하다는 생각이 들었고, 할 수 있을 것 같았고, 해보면 재밌을 것 같다는 생각이 들었다. 그래서 해봤다. 
 
 ## 설계
-- JFrame 설명
+- JFrame 
+![MineSweeper_Structure](https://user-images.githubusercontent.com/109140000/202059040-12dd3a37-6f95-4962-8275-bc54b52125a9.png)
+
 - 메서드&클래스 설명
  
 ## 후기
