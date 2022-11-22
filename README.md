@@ -1,5 +1,9 @@
-# CodingJavaProject2 - Minesweeper
-2022.10.28 ~ 2022.11.13
+# CodingJavaProject2 - Minesweeper (22.10.28 ~ 22.11.13)  
+<img src="https://img.shields.io/badge/java-007396?style=for-the-badge&logo=java&logoColor=white">  
+
+![game_ing](https://user-images.githubusercontent.com/109140000/202083846-cf8db251-0276-4e57-805d-8201ad11841d.png)
+![game_end](https://user-images.githubusercontent.com/109140000/202083862-d7209127-e937-416b-b2a8-2f9153744eb7.png)
+![game_fail](https://user-images.githubusercontent.com/109140000/202085840-65fa2270-fa6b-4cf5-ba91-ae1938e5ba6d.png)
 
 ### 목차
 개발 동기 - 설계 - 후기 - 개선 사항 - 참고
@@ -10,9 +14,12 @@
 - 해볼 만하다는 생각이 들었고, 할 수 있을 것 같았고, 해보면 재밌을 것 같다는 생각이 들었다. 그래서 해봤다. 
 
 ## 설계
-- JFrame 설명
-- 메서드&클래스 설명
- 
+- JFrame 
+![MineSweeper_Structure](https://user-images.githubusercontent.com/109140000/202059040-12dd3a37-6f95-4962-8275-bc54b52125a9.png)
+- Class & Method   
+![Minesweeper_methods_right](https://user-images.githubusercontent.com/109140000/202085895-02784591-6583-4017-b7b7-a64e25682fe3.png)
+
+
 ## 후기
 맨날 Eclipse 콘솔창에다 글자만 찍다가, 스스로 움직이고 내 동작에 반응하는 프로그램을 만들어내니 재밌었다.
 코드가 점차 길어질수록 변수와 메서드가 다양해지고 많아졌는데, 마치 부품들을 조립하는 느낌이 들었다.
@@ -69,8 +76,25 @@
 
 ## 참고
 - 11-15-2022 부, 별도 관리
-- 이전 Repository : JavaStudy
-- JavaStudy 내의 Commit 기록들
-
 - 현재 Repository에서의 기록  
-11-15-2022 / JavaStudy에 있던 프로그램 파일 현Repo로 이전 
+11-15-2022 / JavaStudy에 있던 프로그램 파일 현Repo로 이전  
+
+- 이전 Repository : JavaStudy
+- JavaStudy 내의 Commit 기록들  
+(10-28-2022) &nbsp; https://github.com/SiHoonChris/JavaStudy/commit/3f10000c97f16d54b0009d95ef761a86606bb4a9  
+(10-29-2022) &nbsp; https://github.com/SiHoonChris/JavaStudy/commit/ab768cfb4ddc589443ff2faba7303a0b518baff7  
+(10-30-2022) &nbsp; https://github.com/SiHoonChris/JavaStudy/commit/5738bd269f6efa9eccc03b7c34f9ffe53946198a  
+(10-31-2022) &nbsp; https://github.com/SiHoonChris/JavaStudy/commit/0c1c7ba7bf0d217e64e0fd5e307c7ef035edbcf4  
+(11-01-2022) &nbsp; https://github.com/SiHoonChris/JavaStudy/commit/785a696f73d06b8c5f99804e5c39f8e27788fa1e  
+(11-02-2022) &nbsp; https://github.com/SiHoonChris/JavaStudy/commit/be14eae7ca105f4726c99ad1cc7f5b165eb4bc7f  
+(11-03-2022) &nbsp; https://github.com/SiHoonChris/JavaStudy/commit/18bc54ce3cd61e900239b9a24d858f034fbb17d8  
+(11-04-2022) &nbsp; https://github.com/SiHoonChris/JavaStudy/commit/b1ac6e7b8cd9d955647dddbbb4361305aa37ecfe  
+(11-05-2022) &nbsp; https://github.com/SiHoonChris/JavaStudy/commit/aaa76755c08732faaad51125d4c0b78ada0e966f  
+(11-06-2022) &nbsp; https://github.com/SiHoonChris/JavaStudy/commit/3cfd3c7ad198d4aba21de37ea0c4e4ced81a0c0f  
+(11-07-2022) &nbsp; https://github.com/SiHoonChris/JavaStudy/commit/d3191b5e8a86ff645a0a4010887df768249f984e  
+(11-08-2022) &nbsp; https://github.com/SiHoonChris/JavaStudy/commit/bb4d5eaa1070048fac99920f81b60e4cabea7a7f  
+(11-09-2022) &nbsp; https://github.com/SiHoonChris/JavaStudy/commit/43fb92455f1236ae3c41a88808739813e181c51b  
+(11-10-2022) &nbsp; https://github.com/SiHoonChris/JavaStudy/commit/a5d4701ed1f79a2ba086ea92130efefb572cf17b  
+(11-11-2022) &nbsp; https://github.com/SiHoonChris/JavaStudy/commit/83fe8928d1ad226179fa99aaf9ec9c251aeb57df  
+(11-12-2022) &nbsp; https://github.com/SiHoonChris/JavaStudy/commit/3159c8c33146f00cb4a61b46c4fb9e23024fa3ca  
+(11-13-2022) &nbsp; https://github.com/SiHoonChris/JavaStudy/commit/89a8339b67e2977995900098df0d393e2ef96ff1  
