@@ -31,8 +31,9 @@ public class Minesweeper extends JFrame {
 	static String timeRc;                           // 게임 종료 시 시간 계산 ( (endTime-startTime)/1000 )
 	
 	JButton restart = new JButton();                // 상태(평시에는 노란색, 지뢰 밟으면 검은색) 및 재시작
-	boolean wtf;                                    // 패배 : 지뢰 밟으면 true로 변환
-	boolean gameResult;                             // 승리 : 게임 승리 시 true로 변환
+	boolean lose;                                   // 패배 : 지뢰 밟으면 true로 변환
+	boolean win;                                    // 승리 : 게임 승리 시 true로 전환
+    static String result;                           // 게임 결과(승리 : CONGRATULATIONS!!! / 패배 : AGAIN...?)
 	
 	JLabel findEmAll = new JLabel();                // 찾은 지뢰 수(gamePane 위의 ▲(우클릭) 갯수, 초기값 10 - 10개 이상 우클릭 시 0)
 	JPanel flagPanel = new JPanel();                // findEmAll의 배경(패널)
@@ -107,8 +108,8 @@ public class Minesweeper extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	} // END - MineSweeper(String title){}
 	
-	Minesweeper(Boolean gameResult){  // 게임 승리 시 출력(실행)할 생성자
-		if(gameResult) {
+	Minesweeper(Boolean winOrlose){  // 게임 승리 시 출력(실행)할 생성자
+		if(winOrlose) {
 			getContentPane().setBackground(Color.WHITE);
 			getContentPane().setLayout(new BorderLayout());
 			
@@ -116,12 +117,30 @@ public class Minesweeper extends JFrame {
 			tR.setText(timeRc);
 			getContentPane().add(tR, BorderLayout.NORTH);
 			
-			JLabel Cong = new JLabel();
-			Cong.setFont(new Font("MS Gothic", Font.BOLD|Font.ITALIC, 17));
-			Cong.setForeground(Color.BLUE);
-			Cong.setText("CONGRATULATIONS!!!");
-			Cong.setHorizontalAlignment(SwingConstants.CENTER);
-			getContentPane().add(Cong, BorderLayout.CENTER);
+			
+			JPanel showResult = new JPanel();
+			showResult.setLayout(new BorderLayout());
+			showResult.setBackground(Color.WHITE);
+			
+			JLabel comment = new JLabel();
+			comment.setFont(new Font("MS Gothic", Font.BOLD|Font.ITALIC, 17));
+			comment.setForeground(Color.BLUE);
+			comment.setText(result);
+			comment.setHorizontalAlignment(SwingConstants.CENTER);
+			showResult.add(comment, BorderLayout.CENTER);
+			
+			JPanel showButtons = new JPanel();
+			showButtons.setBackground(Color.WHITE);
+			JButton retry = new JButton();
+			retry.setText("Retry");
+			JButton quit = new JButton();
+			quit.setText("Close");
+			showButtons.add(retry);
+			showButtons.add(quit);
+			showResult.add(showButtons, BorderLayout.SOUTH);
+			
+			getContentPane().add(showResult, BorderLayout.CENTER);
+			
 			
 			JLabel createdBy = new JLabel();
 			createdBy.setText("created by SiHoonChris");
@@ -131,7 +150,7 @@ public class Minesweeper extends JFrame {
 			
 			setBounds((int)(500*1.3), (int)(200*1.6), 200, 300);
 			setResizable(false);
-			setVisible(gameResult);
+			setVisible(winOrlose);
 		}
 	} // END - MineSweeper(Boolean gameResult){}
 	// ----------------- [ Constructor ] ----------------- // end
@@ -172,7 +191,7 @@ public class Minesweeper extends JFrame {
 						time.setText(tRecord);
 					}
 					catch(Exception e){ System.out.println(e.getMessage()); }
-					if(wtf || gameResult) {break;}
+					if(lose || win) {break;}
 				}
 				
 				endTime=System.currentTimeMillis();
@@ -180,7 +199,10 @@ public class Minesweeper extends JFrame {
 				float f_timeRc = Float.valueOf(endTime-startTime);      
 				timeRc = String.format("Time : %.4fsec", f_timeRc/1000);
 				
-				new Minesweeper(gameResult);  // 게임 종료(승리) 창 생성
+				if(win==true) result="CONGRATULATIONS!!!";
+				if(lose==true) result="AGAIN...?";
+				
+				new Minesweeper(true);  // 게임 결과 창 생성
 			}
 		};
 		timer.start();
@@ -235,7 +257,7 @@ public class Minesweeper extends JFrame {
 							if(mineField[i][j].equals("◎")) {
 								mineOrNot[i][j].setBackground(Color.RED);
 								stepOnTheMine();
-								wtf=true;
+								lose=true;
 							}
 							else {
 								mineOrNot[i][j].setBackground(Color.GRAY);
@@ -364,7 +386,7 @@ public class Minesweeper extends JFrame {
 				}
 			}
 			
-			if(noMinesUnderMyFoot == SIZE*SIZE-10) gameResult=true;
+			if(noMinesUnderMyFoot == SIZE*SIZE-10) win=true;
 		} // END - public void survived()
 		
 	} // END - class MyActionListener implements ActionListener{}
