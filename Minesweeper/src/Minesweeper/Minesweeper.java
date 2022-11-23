@@ -113,13 +113,17 @@ public class Minesweeper extends JFrame {
 			getContentPane().setBackground(Color.WHITE);
 			getContentPane().setLayout(new BorderLayout());
 			
+			// 게임 종료까지 걸린 시간
 			JLabel tR = new JLabel();
 			tR.setText(timeRc);
 			getContentPane().add(tR, BorderLayout.NORTH);
 			
+			// 게임 결과에 대한 Comment 와 재시작-종료 버튼
+			JPanel gameEnd = new JPanel();
+			gameEnd.setLayout(new BorderLayout());
 			
 			JPanel showResult = new JPanel();
-			showResult.setLayout(new BorderLayout());
+			showResult.setLayout(new GridLayout(2, 1));
 			showResult.setBackground(Color.WHITE);
 			
 			JLabel comment = new JLabel();
@@ -127,21 +131,33 @@ public class Minesweeper extends JFrame {
 			comment.setForeground(Color.BLUE);
 			comment.setText(result);
 			comment.setHorizontalAlignment(SwingConstants.CENTER);
-			showResult.add(comment, BorderLayout.CENTER);
+			comment.setVerticalAlignment(SwingConstants.BOTTOM);
+			showResult.add(comment);
 			
 			JPanel showButtons = new JPanel();
 			showButtons.setBackground(Color.WHITE);
+			
+			Border raisedbevel = BorderFactory.createRaisedBevelBorder();
 			JButton retry = new JButton();
-			retry.setText("Retry");
+			retry.setBackground(Color.LIGHT_GRAY);
+			retry.setBorder(raisedbevel);
+			retry.setText("   Retry   ");
 			JButton quit = new JButton();
-			quit.setText("Close");
+			quit.setBackground(Color.LIGHT_GRAY);
+			quit.setBorder(raisedbevel);
+			quit.setText("   Close   ");
 			showButtons.add(retry);
 			showButtons.add(quit);
-			showResult.add(showButtons, BorderLayout.SOUTH);
+			showResult.add(showButtons);
 			
-			getContentPane().add(showResult, BorderLayout.CENTER);
+			JPanel emptyRoom = new JPanel();  // 위치 조정용
+			emptyRoom.setBackground(Color.WHITE);
 			
+			gameEnd.add(showResult, BorderLayout.CENTER);
+			gameEnd.add(emptyRoom, BorderLayout.SOUTH);
+			getContentPane().add(gameEnd, BorderLayout.CENTER);
 			
+			// 만든이
 			JLabel createdBy = new JLabel();
 			createdBy.setText("created by SiHoonChris");
 			createdBy.setHorizontalAlignment(SwingConstants.RIGHT);
