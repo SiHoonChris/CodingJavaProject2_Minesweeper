@@ -29,21 +29,25 @@ public class Minesweeper extends JFrame {
 	long startTime;                                 // 게임 시작 시간 - gameStart가 true가 되면 시작
 	long endTime;                                   // 게임 종료 시간 - wtf 또는 gameResult가 true가 되면 종료
 	static String timeRc;                           // 게임 종료 시 시간 계산 ( (endTime-startTime)/1000 )
-	
+
 	JButton restart = new JButton();                // 상태(평시에는 노란색, 지뢰 밟으면 검은색) 및 재시작
 	boolean lose;                                   // 패배 : 지뢰 밟으면 true로 변환
 	boolean win;                                    // 승리 : 게임 승리 시 true로 전환
-    static String result;                           // 게임 결과(승리 : CONGRATULATIONS!!! / 패배 : AGAIN...?)
-	
+
 	JLabel findEmAll = new JLabel();                // 찾은 지뢰 수(gamePane 위의 ▲(우클릭) 갯수, 초기값 10 - 10개 이상 우클릭 시 0)
 	JPanel flagPanel = new JPanel();                // findEmAll의 배경(패널)
+	
+    static String result;                           // 게임 결과(승리 : CONGRATULATIONS!!! / 패배 : AGAIN...?)
+	JButton retry = new JButton();                  // 재시작 버튼
+	JButton quit = new JButton();                   // 종료 버튼
+	
 	// ------------------------- 멤버변수 정리 ------------------------- //
 
 	
 	// --------------- 생성자, 쓰레드, 이벤트 리스너, 메서드 ------------------ //
 	
 	// ----------------- [ Constructor ] ----------------- // begin 
-	Minesweeper(String title){  // 기본 생성자
+	Minesweeper(String title){  // 게임 실행 윈도우
 		super(title);
 				
 		recordPane.setLayout(new FlowLayout(FlowLayout.CENTER, 90, 5));
@@ -106,9 +110,10 @@ public class Minesweeper extends JFrame {
 		setVisible(true);
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
 	} // END - MineSweeper(String title){}
 	
-	Minesweeper(Boolean winOrlose){  // 게임 승리 시 출력(실행)할 생성자
+	Minesweeper(boolean winOrlose){  // 게임 결과 윈도우
 		if(winOrlose) {
 			getContentPane().setBackground(Color.WHITE);
 			getContentPane().setLayout(new BorderLayout());
@@ -138,11 +143,11 @@ public class Minesweeper extends JFrame {
 			showButtons.setBackground(Color.WHITE);
 			
 			Border raisedbevel = BorderFactory.createRaisedBevelBorder();
-			JButton retry = new JButton();
+			retry.addActionListener(new MyActionListener()); //이벤트 리스너 부착 , retry 지역변수에서 멤버변수로 전환
 			retry.setBackground(Color.LIGHT_GRAY);
 			retry.setBorder(raisedbevel);
 			retry.setText("   Retry   ");
-			JButton quit = new JButton();
+			quit.addActionListener(new MyActionListener()); //이벤트 리스너 부착 , quit 지역변수에서 멤버변수로 전환
 			quit.setBackground(Color.LIGHT_GRAY);
 			quit.setBorder(raisedbevel);
 			quit.setText("   Close   ");
@@ -256,10 +261,14 @@ public class Minesweeper extends JFrame {
 		} // END - public void mousePressed(MouseEvent e)
 		
 		public void actionPerformed(ActionEvent e) {
-			if((JButton)e.getSource()==restart) {
-				setVisible(false);
+			if((JButton)e.getSource()==restart||(JButton)e.getSource()==retry) {
 				dispose();
-				new Minesweeper("지뢰찾기");
+				new Minesweeper("지뢰찾기"); // retry누르니까 게임 결과 윈도우(Minesweeper(boolean))는 종료되는데 이전 게임 윈도우가 종료가 안된다.
+			}
+			else if((JButton)e.getSource()==quit) {
+				// https://m.blog.naver.com/PostView.naver?isHttpsRedirect=true&blogId=merkuree&logNo=130017585162
+				// ( dispose는 프로그램을 종료시키는 것이 아니라, "현재" 의 frame 하나만 종료시킴 )
+				System.exit(0);
 			}
 			else {
 				gameStart=true;
