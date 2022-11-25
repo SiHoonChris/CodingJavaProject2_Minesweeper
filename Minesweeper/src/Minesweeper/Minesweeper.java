@@ -6,8 +6,6 @@ import java.awt.*;
 import java.awt.event.*;
 
 
-// *** 윈도우 추가 *** //
-// *** 버튼 부착 : Restart 또는 Retry & Close *** //
 public class Minesweeper extends JFrame {
 	
 	// ----------------------- [ Main Method ] ---------------------- //
@@ -25,12 +23,12 @@ public class Minesweeper extends JFrame {
 	JLabel time = new JLabel();                     // 스톱워치
 	JPanel timePanel = new JPanel();                // time의 배경(패널)
 	public Thread timer;                            // 스톱워치 작동 Thread
-	boolean gameStart;                              // true일 때부터 시간 흐름(스톱워치 시작) - 좌우 상관없이 첫 클릭 후 true로 전환
+	boolean gameStart;                              // true일 때부터 시간 흐름(스톱워치 시작) - 좌우 클릭 상관없이 첫 클릭 후 true로 전환
 	long startTime;                                 // 게임 시작 시간 - gameStart가 true가 되면 시작
-	long endTime;                                   // 게임 종료 시간 - wtf 또는 gameResult가 true가 되면 종료
+	long endTime;                                   // 게임 종료 시간 - lose 또는 win이 true가 되면 종료
 	static String timeRc;                           // 게임 종료 시 시간 계산 ( (endTime-startTime)/1000 )
 
-	JButton restart = new JButton();                // 상태(평시에는 노란색, 지뢰 밟으면 검은색) 및 재시작
+	JButton restart = new JButton();                // 상태 표시(평시에는 노란색, 지뢰 밟으면 검은색) & 게임 중 재시작 버튼
 	boolean lose;                                   // 패배 : 지뢰 밟으면 true로 변환
 	boolean win;                                    // 승리 : 게임 승리 시 true로 전환
 
@@ -40,16 +38,17 @@ public class Minesweeper extends JFrame {
     static String result;                           // 게임 결과(승리 : CONGRATULATIONS!!! / 패배 : AGAIN...?)
 	JButton retry = new JButton();                  // 재시작 버튼
 	JButton quit = new JButton();                   // 종료 버튼
+	JFrame resultPane;                              // 게임 결과 출력 패널
 	
-	// ------------------------- 멤버변수 정리 ------------------------- //
-
+	// ---------------------------- 멤버변수 정리 ---------------------------- //
 	
-	// --------------- 생성자, 쓰레드, 이벤트 리스너, 메서드 ------------------ //
 	
-	// ----------------- [ Constructor ] ----------------- // begin 
-	Minesweeper(String title){  // 게임 실행 윈도우
+	// --------------- 생성자, 쓰레드, 이벤트 리스너&핸들러, 메서드 ------------------ //
+	
+	// ----------------------- [ Constructor ] ----------------------- // begin 
+	Minesweeper(String title){  // 게임 실행 윈도우 생성
 		super(title);
-				
+		
 		recordPane.setLayout(new FlowLayout(FlowLayout.CENTER, 90, 5));
 		recordPane.setBackground(Color.LIGHT_GRAY);
 		
@@ -110,72 +109,70 @@ public class Minesweeper extends JFrame {
 		setVisible(true);
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
 	} // END - MineSweeper(String title){}
+	// ----------------------- [ Constructor ] ----------------------- // end
 	
-	Minesweeper(boolean winOrlose){  // 게임 결과 윈도우
-		if(winOrlose) {
-			getContentPane().setBackground(Color.WHITE);
-			getContentPane().setLayout(new BorderLayout());
-			
-			// 게임 종료까지 걸린 시간
-			JLabel tR = new JLabel();
-			tR.setText(timeRc);
-			getContentPane().add(tR, BorderLayout.NORTH);
-			
-			// 게임 결과에 대한 Comment 와 재시작-종료 버튼
-			JPanel gameEnd = new JPanel();
-			gameEnd.setLayout(new BorderLayout());
-			
-			JPanel showResult = new JPanel();
-			showResult.setLayout(new GridLayout(2, 1));
-			showResult.setBackground(Color.WHITE);
-			
-			JLabel comment = new JLabel();
-			comment.setFont(new Font("MS Gothic", Font.BOLD|Font.ITALIC, 17));
-			comment.setForeground(Color.BLUE);
-			comment.setText(result);
-			comment.setHorizontalAlignment(SwingConstants.CENTER);
-			comment.setVerticalAlignment(SwingConstants.BOTTOM);
-			showResult.add(comment);
-			
-			JPanel showButtons = new JPanel();
-			showButtons.setBackground(Color.WHITE);
-			
-			Border raisedbevel = BorderFactory.createRaisedBevelBorder();
-			retry.addActionListener(new MyActionListener()); //이벤트 리스너 부착 , retry 지역변수에서 멤버변수로 전환
-			retry.setBackground(Color.LIGHT_GRAY);
-			retry.setBorder(raisedbevel);
-			retry.setText("   Retry   ");
-			quit.addActionListener(new MyActionListener()); //이벤트 리스너 부착 , quit 지역변수에서 멤버변수로 전환
-			quit.setBackground(Color.LIGHT_GRAY);
-			quit.setBorder(raisedbevel);
-			quit.setText("   Close   ");
-			showButtons.add(retry);
-			showButtons.add(quit);
-			showResult.add(showButtons);
-			
-			JPanel emptyRoom = new JPanel();  // 위치 조정용
-			emptyRoom.setBackground(Color.WHITE);
-			
-			gameEnd.add(showResult, BorderLayout.CENTER);
-			gameEnd.add(emptyRoom, BorderLayout.SOUTH);
-			getContentPane().add(gameEnd, BorderLayout.CENTER);
-			
-			// 만든이
-			JLabel createdBy = new JLabel();
-			createdBy.setText("created by SiHoonChris");
-			createdBy.setHorizontalAlignment(SwingConstants.RIGHT);
-			// https://stackoverflow.com/questions/12589494/align-text-in-jlabel-to-the-right
-			getContentPane().add(createdBy, BorderLayout.SOUTH);
-			
-			setBounds((int)(500*1.3), (int)(200*1.6), 200, 300);
-			setResizable(false);
-			setVisible(winOrlose);
-		}
-	} // END - MineSweeper(Boolean gameResult){}
-	// ----------------- [ Constructor ] ----------------- // end
-	
+	public void MinesweeperResult(){  // 게임 결과(시간, 승패, 제작자) 출력 윈도우
+		resultPane = new JFrame();
+		resultPane.setBackground(Color.WHITE);
+		resultPane.setLayout(new BorderLayout());
+		
+		// 게임 종료까지 걸린 시간
+		JLabel tR = new JLabel();
+		tR.setText(timeRc);
+		resultPane.add(tR, BorderLayout.NORTH);
+		
+		// 게임 결과에 대한 Comment & 재시작-종료 버튼
+		JPanel gameEnd = new JPanel();
+		gameEnd.setLayout(new BorderLayout());
+		
+		JPanel showResult = new JPanel();
+		showResult.setLayout(new GridLayout(2, 1));
+		showResult.setBackground(Color.WHITE);
+		
+		JLabel comment = new JLabel();
+		comment.setFont(new Font("MS Gothic", Font.BOLD|Font.ITALIC, 17));
+		comment.setForeground(Color.BLUE);
+		comment.setText(result);
+		comment.setHorizontalAlignment(SwingConstants.CENTER);
+		comment.setVerticalAlignment(SwingConstants.BOTTOM);
+		showResult.add(comment);
+		
+		JPanel showButtons = new JPanel();
+		showButtons.setBackground(Color.WHITE);
+		
+		Border raisedbevel = BorderFactory.createRaisedBevelBorder();
+		retry.addActionListener(new MyActionListener());
+		retry.setBackground(Color.LIGHT_GRAY);
+		retry.setBorder(raisedbevel);
+		retry.setText("   Retry   ");
+		quit.addActionListener(new MyActionListener());
+		quit.setBackground(Color.LIGHT_GRAY);
+		quit.setBorder(raisedbevel);
+		quit.setText("   Close   ");
+		showButtons.add(retry);
+		showButtons.add(quit);
+		showResult.add(showButtons);
+		
+		JPanel emptyRoom = new JPanel(); //(위치 조정용)
+		emptyRoom.setBackground(Color.WHITE);
+		
+		gameEnd.add(showResult, BorderLayout.CENTER);
+		gameEnd.add(emptyRoom, BorderLayout.SOUTH);
+		resultPane.add(gameEnd, BorderLayout.CENTER);
+		
+		// 제작자 정보
+		JLabel createdBy = new JLabel();
+		createdBy.setText("created by SiHoonChris");
+		createdBy.setHorizontalAlignment(SwingConstants.RIGHT);
+		// https://stackoverflow.com/questions/12589494/align-text-in-jlabel-to-the-right
+		resultPane.add(createdBy, BorderLayout.SOUTH);
+		
+		resultPane.setBounds((int)(500*1.3), (int)(200*1.6), 200, 300);
+		resultPane.setResizable(false);
+		resultPane.setVisible(true);
+	} // END - public void MinesweeperResult()
+		
 	public void mineInstall(){  // 지뢰 생성(10개)
 		int cnt=0;
 		
@@ -223,13 +220,13 @@ public class Minesweeper extends JFrame {
 				if(win==true) result="CONGRATULATIONS!!!";
 				if(lose==true) result="AGAIN...?";
 				
-				new Minesweeper(true);  // 게임 결과 창 생성
+				MinesweeperResult();  // 게임 결과
 			}
 		};
 		timer.start();
 	} // END - public void timeClock(){}
 	
-	// ----------------- [ Event Listener ] ----------------- // begin
+	// ----------------------- [ Event Listener ] ----------------------- // begin
 	// Methods : mousePressed(), actionPerformed(), stepOnTheMine(), stepOnTheLand(),
 	//           colorOfNumber(), afterExpansion(), flagCounter(), survived()
 	class MyActionListener extends MouseAdapter implements ActionListener{
@@ -261,15 +258,21 @@ public class Minesweeper extends JFrame {
 		} // END - public void mousePressed(MouseEvent e)
 		
 		public void actionPerformed(ActionEvent e) {
-			if((JButton)e.getSource()==restart||(JButton)e.getSource()==retry) {
+			if((JButton)e.getSource()==restart) {
 				dispose();
-				new Minesweeper("지뢰찾기"); // retry누르니까 게임 결과 윈도우(Minesweeper(boolean))는 종료되는데 이전 게임 윈도우가 종료가 안된다.
+				new Minesweeper("지뢰찾기");
+			}
+			
+			else if((JButton)e.getSource()==retry) {
+				dispose();             // 게임 윈도우를 종료
+				resultPane.dispose();  // 게임 결과 윈도우를 종료
+				new Minesweeper("지뢰찾기");
 			}
 			else if((JButton)e.getSource()==quit) {
 				// https://m.blog.naver.com/PostView.naver?isHttpsRedirect=true&blogId=merkuree&logNo=130017585162
-				// ( dispose는 프로그램을 종료시키는 것이 아니라, "현재" 의 frame 하나만 종료시킴 )
 				System.exit(0);
 			}
+			
 			else {
 				gameStart=true;
 				
@@ -414,7 +417,7 @@ public class Minesweeper extends JFrame {
 			if(noMinesUnderMyFoot == SIZE*SIZE-10) win=true;
 		} // END - public void survived()
 		
-	} // END - class MyActionListener implements ActionListener{}
-	// ----------------- [ Event Listener ] ----------------- // end
+	} // END - class MyActionListener extends MouseAdapter implements ActionListener{}
+	// ----------------------- [ Event Listener ] ----------------------- // end
 	
 } // END - public class MineSweeper extends JFrame{}
