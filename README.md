@@ -64,7 +64,16 @@
 - 문제 : 안됨 
 - 분석 : 안했음. 방법 바꿔가면서 그냥 될 때까지 해봄
 - 원인 : actionPerformed()내에서 마우스 이벤트에 대한 내용 작성, getButton과 getSource 혼동
-- 해결 : MyActionListener클래스 내에 mousePressed메서드 추가. 제대로 된 조건 하에, 실행할 코드를 작성. 생성자에서 버튼(2차원 배열의 각 칸)에 대해 addMouseListener 추가
+- 해결 : MyActionListener클래스 내에 mousePressed메서드 추가. 제대로 된 조건 하에, 실행할 코드를 작성. 생성자에서 버튼(2차원 배열의 각 칸)에 대해 addMouseListener 추가  
+6) retry 버튼 기능 구현 간  
+- 목적 : retry 버튼 기능 클릭 시, 기존에 띄워져 있던 게임 '실행'창과 게임 '결과'창은 종료되고 새로운 게임 실행창은 생성  
+- 계획 : retry 버튼 클릭시 기존 윈도우들에 dispose( )가 실행되게 하자  
+- 문제 : 이전 게임 실행창이 종료가 안됨 (나머지는 정상 작동)  
+- 분석 : 구글링, 이클립스 내에서 Declaration 참고  
+- 원인 : dispose( )는 해당 시점에 활성화된 윈도우(프레임) 하나에만 작동  
+- 해결 : 윈도우 생성 방법 분리 - 생성자(게임 실행창)와 메서드(게임 결과창)  
+&nbsp;  contentPane구분 - getContentPane( )(게임 실행창)과 resultPane(게임 결과창)  
+&nbsp;  dispose( ) 개별 실행 - dispose( )(게임 실행창)와 resultPane.dispose( )(게임 결과창)  
 
 ## 개선 사항 
 - Minesweeper
