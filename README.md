@@ -1,9 +1,10 @@
 # CodingJavaProject2 - Minesweeper (22.10.28 ~ 22.11.13)  
 <img src="https://img.shields.io/badge/java-007396?style=for-the-badge&logo=java&logoColor=white">  
 
-![game_ing](https://user-images.githubusercontent.com/109140000/202083846-cf8db251-0276-4e57-805d-8201ad11841d.png)
-![game_end](https://user-images.githubusercontent.com/109140000/202083862-d7209127-e937-416b-b2a8-2f9153744eb7.png)
-![game_fail](https://user-images.githubusercontent.com/109140000/202085840-65fa2270-fa6b-4cf5-ba91-ae1938e5ba6d.png)
+![MineSweeper_OnGame](https://user-images.githubusercontent.com/109140000/204074033-ecf0daad-34fb-4190-b01c-27b009e00315.png)  
+![MineSweeper_WinGame](https://user-images.githubusercontent.com/109140000/204074044-83eee100-a38e-4797-8c8c-79d0292e1686.png)  
+![MineSweeper_EndGame](https://user-images.githubusercontent.com/109140000/204074051-fd565464-b9f9-4121-995b-b79c8ef2ffee.png)  
+
 
 ### 목차
 개발 동기 - 설계 - 후기 - 개선 사항 - 참고
@@ -15,18 +16,19 @@
 
 ## 설계
 - JFrame 
-![MineSweeper_Structure](https://user-images.githubusercontent.com/109140000/202059040-12dd3a37-6f95-4962-8275-bc54b52125a9.png)
+![MineSweeper_Structure](https://user-images.githubusercontent.com/109140000/202059040-12dd3a37-6f95-4962-8275-bc54b52125a9.png)  <br>
+![minesweeper_edited_arch](https://user-images.githubusercontent.com/109140000/204074230-21b70853-88f8-4cb3-babf-18f4ac788dcb.png)  
 - Class & Method   
-![Minesweeper_methods_right](https://user-images.githubusercontent.com/109140000/202085895-02784591-6583-4017-b7b7-a64e25682fe3.png)
-
+![Minesweeper_code_arch](https://user-images.githubusercontent.com/109140000/204074202-6ddc2190-13af-496f-9ef7-480a7c9ccbb0.png)  
 
 ## 후기
 맨날 Eclipse 콘솔창에다 글자만 찍다가, 스스로 움직이고 내 동작에 반응하는 프로그램을 만들어내니 재밌었다.
 코드가 점차 길어질수록 변수와 메서드가 다양해지고 많아졌는데, 마치 부품들을 조립하는 느낌이 들었다.
 코드를 작성하다 막혀서 힘들고 답답할 때도 있었는데 고민하던 부분을 해결해 냈을 때는 그 힘듦을 다 보상받는 느낌이었다.
-또한 수업 시간에는 배우지 못한 내용들을 스스로 더 찾아서 배울 수 있는 좋은 경험이었다. 
+또한 수업 시간에는 배우지 못한 내용들을 스스로 더 찾아서 배울 수 있는 좋은 경험이었다.  
+
 이 프로젝트를 하면서 어려웠던 점들을 돌이켜 보면 다음과 같다.
-(분명 더 있었을 테지만, 이 글을 작성하는 시점(22.11.15)에서 기억이 나지 않는 걸 보면 그렇게 어렵지는 않았던 것 같다.)
+(분명 더 있었을 테지만, 이 글을 작성하는 시점(22.11.15 / 최종 수정 : 22.11.26)에서 기억이 나지 않는 걸 보면 그렇게 어렵지는 않았던 것 같다.)
 
 1) stepOnTheLand( ) 메서드 구현 간(초반) 
 - 목적 : 버튼(2차원 배열 - 9rows , 9columns) 클릭 시 해당 지점을 기준으로 모든 방향에 대해 한 칸씩 확장(클릭된 것과 같은 결과)
@@ -66,8 +68,8 @@
 
 ## 개선 사항 
 - Minesweeper
-1) 승패에 상관없이 게임 종료 시 윈도우 생성
-2) 게임 종료 시 생성된 윈도우에 버튼 2개 추가(재시작 , 종료)
+1) 승패에 상관없이 게임 종료 시 윈도우 생성 (11-23-2022, 개선 완료)  
+2) 게임 종료 시 생성된 윈도우에 버튼 2개 추가(재시작 , 종료) (11-25-2022, 개선 완료)  
 - SiHoonChris
 1) 많은 시도와 다양한 접근을 통해 문제 해결에 적극적으로 임하는 것은 좋으나,
 새로운 시도에만 초점을 맞추다 보니 발생한 문제의 근본적인 원인을 깊게 분석하지 못하는 경향이 있는 것 같다.
@@ -78,6 +80,11 @@
 - 11-15-2022 부, 별도 관리
 - 현재 Repository에서의 기록  
 11-15-2022 / JavaStudy에 있던 프로그램 파일 현Repo로 이전  
+11-22-2022 / 변수명 수정 및 변수 추가, 게임 결과창 프레임 수정  
+11-23-2022 / 게임 결과창 프레임 수정  
+11-24-2022 / 게임 결과창 프레임 내 버튼에 기능 구현  
+11-25-2022 / 게임 결과창 프레임 내 버튼에 기능 구현(수정)  
+
 
 - 이전 Repository : JavaStudy
 - JavaStudy 내의 Commit 기록들  
