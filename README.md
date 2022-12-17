@@ -4,10 +4,12 @@
 ![MineSweeper_OnGame](https://user-images.githubusercontent.com/109140000/204074033-ecf0daad-34fb-4190-b01c-27b009e00315.png)  
 ![MineSweeper_WinGame](https://user-images.githubusercontent.com/109140000/204074044-83eee100-a38e-4797-8c8c-79d0292e1686.png)  
 ![MineSweeper_EndGame](https://user-images.githubusercontent.com/109140000/204074051-fd565464-b9f9-4121-995b-b79c8ef2ffee.png)  
+<div align="right">최초 제작 : 22.10.28 ~ 22.11.13 , 개선 및 보완 : 22.11.22 ~ 22.11.25</div><br><br>  
 
 
-### 목차
-개발 동기 - 설계 - 후기 - 개선 사항 - 참고
+### 목차  
+&nbsp; &nbsp; 개발 동기 - 설계 - 후기 - 개선 사항 - 참고
+<hr>  
 
 ## 개발 동기
 - 지뢰찾기 제작
